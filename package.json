@@ -1,0 +1,41 @@
+{
+  "name": "ai-chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node --max-old-space-size=4096 --expose-gc src/core/BotRunner.js",
+    "dashboard": "node --watch src/dashboard/server.js",
+    "dev": "node --max-old-space-size=4096 --expose-gc --watch src/core/BotRunner.js",
+    "dev:aman": "node --max-old-space-size=4096 --expose-gc --watch src/core/BotRunner.js aman",
+    "dev:shivam": "node --max-old-space-size=4096 --expose-gc --watch src/core/BotRunner.js shivam",
+    "dev:abhishek": "node --max-old-space-size=4096 --expose-gc --watch src/core/BotRunner.js abhishek",
+    "migrate:conversations": "node scripts/migrate-conversations.js",
+    "migrate:conversations:drop": "node scripts/migrate-conversations.js --drop-legacy",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "postinstall": "node src/utils/patchLiveKit.js"
+  },
+  "dependencies": {
+    "@livekit/rtc-node": "^0.13.29",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "groq-sdk": "^1.2.1",
+    "ioredis": "^5.11.0",
+    "livekit-server-sdk": "^2.9.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^9.7.0",
+    "mysql2": "^3.22.5",
+    "node-pty": "^1.1.0",
+    "p-queue": "^9.3.0",
+    "pino": "^9.6.0",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "pino-pretty": "^13.0.0"
+  }
+}

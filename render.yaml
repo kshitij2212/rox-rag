@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: roxstar-admin-panel
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    region: singapore # Change to your preferred region (e.g., oregon, frankfurt, singapore)
+    envVars:
+      - key: MONGO_URI
+        sync: false # User will input their MongoDB URI on the Render dashboard
+      - key: REDIS_URL
+        sync: false # User will input their Redis URL on the Render dashboard
+      - key: PORT
+        value: 4000

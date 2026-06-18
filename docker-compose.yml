@@ -1,0 +1,32 @@
+# ─── docker-compose.yml ───────────────────────────────────────────────────────
+#
+# Spins up Redis for local development.
+# Run: docker compose up -d
+# Stop: docker compose down
+# Wipe data: docker compose down -v
+
+services:
+
+  redis:
+    image: redis:7-alpine
+    container_name: livekit-bot-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: >
+      redis-server
+        --appendonly yes
+        --appendfsync everysec
+        --maxmemory 256mb
+        --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  redis_data:
+    driver: local
